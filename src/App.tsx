@@ -1,33 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useRef, useState } from 'react'
 import './App.css'
+import { tier, decodeTier } from './tiers'
+import Header from './Header';
+import BadCode from './BadCode';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const codeInput = useRef<HTMLInputElement>(null)
+  const [currentTier, setCurrentTier] = useState<tier | null>(null);
+
+  function updateTier() {
+    var code = codeInput.current?.value || null
+    if(!code) {
+      setCurrentTier(null)
+      return
+    }
+
+    var tier = decodeTier(code)
+    if(!tier) {
+      setCurrentTier(null)
+      return
+    }
+
+    setCurrentTier(tier)
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Header inputRef={codeInput} updateFun={updateTier} />
+
+      <div className='centered-display'>
+        {!currentTier ? <BadCode /> : <div>
+          <span>{JSON.stringify(currentTier, null, 4)}</span>
+        </div>}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }

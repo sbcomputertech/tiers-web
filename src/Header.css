@@ -1,0 +1,29 @@
+.header {
+    /* position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; */
+
+    background-color: indigo;
+
+    padding: 15px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr 1fr;
+    column-gap: 15px;
+}
+
+.header > span {
+    font-weight: bold;
+    font-size: larger;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.code-input {
+    height: 2em;
+    width: 100%;
+    text-align: center;
+}
