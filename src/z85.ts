@@ -58,10 +58,13 @@ export const z85decode = (input: string): Uint8Array | null => {
         return null
     }
 
-    var paddingNum = parseInt(input[input.length - 1]) || 0
-    if(paddingCount != 0 && (!paddingNum || paddingNum < 1 || paddingNum > 3)) {
-        console.error("Invalid Z85 padding number")
-        return null
+    var paddingNum = 0
+    if(paddingCount > 0) {
+        paddingNum = parseInt(input[input.length - 1]) || 0
+        if(paddingCount != 0 && (!paddingNum || paddingNum < 1 || paddingNum > 3)) {
+            console.error("Invalid Z85 padding number")
+            return null
+        }
     }
 
     const decodeSize = Math.floor(input.length / 5) * 4
