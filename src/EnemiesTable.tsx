@@ -1,8 +1,9 @@
 import { enemy } from "./tiers";
 import "./CommonTable.css"
+import * as names from "./names"
 import ImageCard from "./ImageCard";
 
-function EnemiesTable(props: {enemies: enemy[]}) {
+function EnemiesTable(props: {enemies: enemy[], changeHandler: VoidFunction}) {
     return <>
         <table>
             <thead>
@@ -11,18 +12,41 @@ function EnemiesTable(props: {enemies: enemy[]}) {
                         <h2>Enemies:</h2>
                     </td>
                 </tr>
-                <tr>
-                    <td>Enemy type</td>
-                    <td>Count</td>
-                    <td>Wave number</td>
-                </tr>
             </thead>
             <tbody>
                 {props.enemies.map((e, i) => <tr key={i}>
                     <td><ImageCard type="enemy" id={e.name} text={e.name} width={100} height={undefined} /></td>
-                    <td>{e.cost}</td>
-                    <td>{e.minWave}</td>
+                    <td>
+                        Count: &nbsp;
+                        <input type="number" value={e.cost} onChange={ev => {
+                            e.cost = ev.target.valueAsNumber
+                            props.changeHandler()
+                        }} />
+                    </td>
+                    <td>
+                        Wave: &nbsp;
+                        <input type="number" value={e.minWave} onChange={ev => {
+                            e.minWave = ev.target.valueAsNumber
+                            props.changeHandler()
+                        }} />
+                    </td>
                 </tr>)}
+
+                <tr>
+                    <td colSpan={3}>
+                        Add:&nbsp;
+                        <select onChange={e => {
+                            if(props.enemies.filter(m => m.name == e.target.value).length > 0) return
+                            props.enemies.push({ name: e.target.value, cost: 1, minWave: 1 })
+                            props.changeHandler()
+                        }}>
+                            <option selected disabled>Add an enemy</option>
+                            {names.enemies.map(n => <option>
+                                {n}
+                            </option>)}
+                        </select>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </>

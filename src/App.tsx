@@ -51,7 +51,7 @@ function App() {
 
       <div className='centered-display'>
         {!currentTier ? <BadCode /> : <>
-          <EnemiesTable enemies={currentTier.enemies} />
+          <EnemiesTable enemies={currentTier.enemies} changeHandler={generateTier} />
           <ModifiersTable mods={currentTier.mods} changeHandler={generateTier} />
           <WeaponsTable weapons={currentTier.weapons} changeHandler={generateTier} />
         </>}

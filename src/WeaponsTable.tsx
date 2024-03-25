@@ -12,15 +12,17 @@ function WeaponsTable(props: {weapons: weapon[], changeHandler: VoidFunction}) {
                         <h2>Weapons:</h2>
                     </td>
                 </tr>
-                <tr>
-                    <td>Type</td>
-                    <td>Rarity</td>
-                </tr>
             </thead>
             <tbody>
                 {props.weapons.map((w, i) => <tr key={i}>
                     <td><ImageCard type="weapon" id={w.name} text={w.name} width={undefined} height={75} /></td>
-                    <td>{w.rarity}</td>
+                    <td>
+                        Rarity: &nbsp;
+                        <input type="number" value={w.rarity} onChange={e => {
+                            w.rarity = e.target.valueAsNumber
+                            props.changeHandler()
+                        }} />
+                    </td>
                 </tr>)}
 
                 <tr>

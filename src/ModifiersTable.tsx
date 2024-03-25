@@ -12,18 +12,17 @@ function ModifiersTable(props: {mods: modifier[], changeHandler: VoidFunction}) 
                         <h2>Modifiers:</h2>
                     </td>
                 </tr>
-                <tr>
-                    <td>Type</td>
-                    <td>Level (off-15)</td>
-                </tr>
             </thead>
             <tbody>
                 {props.mods.map((m, i) => <tr key={i}>
                     <td><ImageCard type="modifier" id={m.name} text={m.name} width={100} height={undefined} /></td>
-                    <td><input type="range" min={0} max={15} value={m.level} onChange={e => { 
-                        m.level = e.target.valueAsNumber
-                        props.changeHandler()
-                        }} /></td>
+                    <td>
+                        Level: {m.level} <br/>
+                        <input type="range" min={0} max={15} value={m.level} onChange={e => { 
+                            m.level = e.target.valueAsNumber
+                            props.changeHandler()
+                        }} />
+                    </td>
                 </tr>)}
 
                 <tr>
