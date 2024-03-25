@@ -1,7 +1,7 @@
 import { RefObject } from "react"
 import "./Header.css"
 
-function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: VoidFunction, createFun: VoidFunction, currentCode: string}) {
+function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: (code: string) => void, createFun: VoidFunction, currentCode: string}) {
     return <>
         <div className="header">
             <p></p>
@@ -15,7 +15,10 @@ function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: VoidFu
                         autoFocus={true} 
                         ref={props.inputRef} 
                         value={props.currentCode}
-                        onChange={props.updateFun} />
+                        onChange={e => {
+                            e.preventDefault()
+                            props.updateFun(e.target.value || "")
+                        }} />
             </span>
             <span>
                 <button onClick={props.createFun}>New...</button>

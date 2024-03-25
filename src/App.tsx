@@ -16,12 +16,15 @@ function App() {
 
   useEffect(() => {
     setCurrentCode(localStorage.getItem("toh_last_code") || "")
-    updateTier()
   }, [codeInput])
 
   useEffect(() => {
     document.body.style.backgroundImage = `url(bgs/${backgroundName}.png)`
   }, [backgroundName])
+
+  useEffect(() => {
+    updateTier()
+  }, [currentCode])
 
   function createNew() {
       setCurrentTier({
@@ -45,7 +48,6 @@ function App() {
   }
 
   function updateTier() {
-    setCurrentCode(codeInput.current?.value || "")
     localStorage.setItem("toh_last_code", currentCode)
 
     var tier: tier | null
@@ -65,7 +67,7 @@ function App() {
 
   return (
     <>
-      <Header inputRef={codeInput} currentCode={currentCode} updateFun={updateTier} createFun={createNew} />
+      <Header inputRef={codeInput} currentCode={currentCode} updateFun={setCurrentCode} createFun={createNew} />
 
       <div className='centered-display'>
         {!currentTier ? <BadCode /> : <>

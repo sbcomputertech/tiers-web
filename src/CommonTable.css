@@ -18,11 +18,3 @@ td {
     border-bottom: 3px solid white;
     padding: 5px;
 }
-
-td[colspan="2"], td[colspan="3"] {
-    
-}
-
-tbody > tr > td {
-
-}
