@@ -1,6 +1,12 @@
 // These have to be updated from the Serialization[Map/Enemy/Weapon/Modifier]Name 
 // enums in the game's assembly. *pain*
 
+// A //< symbol indicates that I haven't got an image added for that thing yet
+
+// NOTE: Some values have been renamed for clarity
+// Modifiers:
+// - AmmoOverdrive -> OneShot
+
 export const maps = [
     "Launch",
     "Smash",
@@ -95,8 +101,8 @@ export const modifiers = [
     "Interference",
     "InvadingAi",
     "KnockbackSuspension",
-    "HalvedAmmo",
-    "StartingHealthOverride",
+    "HalvedAmmo", //<
+    "StartingHealthOverride", //<
     "Lightweight",
     "MoreBoom",
     "MoreGuns",
@@ -117,10 +123,10 @@ export const modifiers = [
     "StrongLegs",
     "SupplyChain",
     "ThickBlades",
-    "AmmoOverdrive",
+    "OneShot",
     "DeathZoneOverride",
     "NoWebbing",
-    "WeaponRespawnOverride",
+    "WeaponRespawnOverride", //<
     "TooCool",
     "Vacuum",
     "MirrorLasers",

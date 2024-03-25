@@ -17,18 +17,18 @@ interface rawTier {
     i: number // Difficulty number
 }
 
-interface enemy {
+export interface enemy {
     name: string,
     cost: number,
     minWave: number
 }
 
-interface modifier {
+export interface modifier {
     name: string,
     level: number
 }
 
-interface weapon {
+export interface weapon {
     name: string,
     rarity: number
 }

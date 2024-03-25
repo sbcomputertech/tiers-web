@@ -1,0 +1,28 @@
+table {
+    margin: 1em;
+    border: 3px solid white;
+    border-collapse: collapse;
+}
+
+thead {
+    border: 3px solid white;
+}
+
+thead > tr > td {
+    padding: 5px;
+    margin: 10px;
+}
+
+td {
+    border-right: 3px solid white;
+    border-bottom: 3px solid white;
+    padding: 5px;
+}
+
+td[colspan="2"], td[colspan="3"] {
+    
+}
+
+tbody > tr > td {
+
+}
