@@ -5,7 +5,6 @@
 ### User info:
 - To view/edit a code, paste it into the bar at the top
 - You can't remove things at the moment
-- This can be a bit tempramental at times
 - The game does impose limits on some things, e.g. enemy counts not going over 100
 - Please don't submit unbeatable/unverified codes to official spaces (the game discord), you'll most likely get banned and people won't like you
 
