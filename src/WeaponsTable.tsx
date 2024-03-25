@@ -32,6 +32,7 @@ function WeaponsTable(props: {weapons: weapon[], changeHandler: VoidFunction}) {
                             if(props.weapons.filter(m => m.name == e.target.value).length > 0) return
                             props.weapons.push({ name: e.target.value, rarity: 1 })
                             props.changeHandler()
+                            e.target.selectedIndex = 0
                         }}>
                             <option selected disabled>Add a weapon</option>
                             {names.weapons.map(n => <option>

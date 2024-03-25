@@ -32,6 +32,7 @@ function ModifiersTable(props: {mods: modifier[], changeHandler: VoidFunction}) 
                             if(props.mods.filter(m => m.name == e.target.value).length > 0) return
                             props.mods.push({ name: e.target.value, level: 1 })
                             props.changeHandler()
+                            e.target.selectedIndex = 0
                         }}>
                             <option selected disabled>Add a modifier</option>
                             {names.modifiers.map(n => 

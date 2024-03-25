@@ -36,9 +36,9 @@ function EnemiesTable(props: {enemies: enemy[], changeHandler: VoidFunction}) {
                     <td colSpan={3}>
                         Add:&nbsp;
                         <select onChange={e => {
-                            if(props.enemies.filter(m => m.name == e.target.value).length > 0) return
                             props.enemies.push({ name: e.target.value, cost: 1, minWave: 1 })
                             props.changeHandler()
+                            e.target.selectedIndex = 0
                         }}>
                             <option selected disabled>Add an enemy</option>
                             {names.enemies.map(n => <option>
