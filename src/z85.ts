@@ -24,9 +24,30 @@ const base256 = [
     33, 34, 35, 79, 0, 80, 0, 0
 ]
 
-export const z85encode = (input: Uint8Array): string | null => {
-    // TODO
-    return null
+export const z85encode = (input: Uint8Array): string => {
+    if(input.byteLength % 4 == 0) {
+        return z85encodePadded(input)
+    }
+
+    var padAmount = 4 - (input.length % 4)
+    var newBuf = new Uint8Array(input, 0, padAmount)
+    return z85encodePadded(newBuf)
+}
+
+const z85encodePadded = (input: Uint8Array): string => {
+    var str = ""
+    for(var i = 0; i < input.byteLength; i += 4) {
+        let num = ((input[i] << 24) | (input[i+1] << 16) | (input[i+2] << 8) | (input[i+3] << 0)) >>> 0
+        let divisor = 85 ** 4
+
+        for(var j = 0; j < 5; j++) {
+            let val = Math.floor(num / divisor) % 85
+            str += chars[val]
+            num -= val  * divisor
+            divisor /= 85
+        }
+    }
+    return str
 }
 
 export const z85decode = (input: string): Uint8Array | null => {

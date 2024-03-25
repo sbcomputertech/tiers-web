@@ -54,7 +54,7 @@ const shortcuts: any = {
     '+': '{"l":'
 }
 
-export const encodeTier = (t: tier): string | null => {
+export const encodeTier = (t: tier): string => {
     var raw: rawTier = {
         e: [], g: [], f: [], 
         m: [], n: [], 

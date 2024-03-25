@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './App.css'
-import { tier, decodeTier } from './tiers'
+import { tier, decodeTier, encodeTier } from './tiers'
 import Header from './Header';
 import BadCode from './BadCode';
 import EnemiesTable from './EnemiesTable';
@@ -16,6 +16,15 @@ function App() {
     if(codeInput.current) codeInput.current.value = lastCode
     updateTier()
   }, [codeInput])
+
+  function generateTier() {
+    if(codeInput.current && currentTier) {
+      var newCode = encodeTier(currentTier)
+      if(!newCode) return
+      codeInput.current.value = newCode
+      localStorage.setItem("toh_last_code", newCode)
+    }
+  }
 
   function updateTier() {
     var code = codeInput.current?.value || null
@@ -42,7 +51,7 @@ function App() {
       <div className='centered-display'>
         {!currentTier ? <BadCode /> : <>
           <EnemiesTable enemies={currentTier.enemies} />
-          <ModifiersTable mods={currentTier.mods} />
+          <ModifiersTable mods={currentTier.mods} changeHandler={generateTier} />
           <WeaponsTable weapons={currentTier.weapons} />
         </>}
       </div>
