@@ -1,5 +1,7 @@
 # Web editor for Tiers of Heck
 
+## [Use it here](https://sbcomputertech.github.io/tiers-web/)
+
 ### User info:
 - To view/edit a code, paste it into the bar at the top
 - You can't remove things at the moment
