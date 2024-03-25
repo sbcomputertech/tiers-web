@@ -1,7 +1,7 @@
 import { RefObject } from "react"
 import "./Header.css"
 
-function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: VoidFunction}) {
+function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: VoidFunction, currentCode: string}) {
     return <>
         <div className="header">
             <p></p>
@@ -14,6 +14,7 @@ function Header(props: {inputRef: RefObject<HTMLInputElement>, updateFun: VoidFu
                         autoCorrect="off" 
                         autoFocus={true} 
                         ref={props.inputRef} 
+                        value={props.currentCode}
                         onChange={props.updateFun} />
             </span>
         </div>

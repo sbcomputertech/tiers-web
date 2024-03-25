@@ -9,11 +9,11 @@ import WeaponsTable from './WeaponsTable';
 
 function App() {
   const codeInput = useRef<HTMLInputElement>(null)
+  const [currentCode, setCurrentCode] = useState("")
   const [currentTier, setCurrentTier] = useState<tier | null>(null);
 
   useEffect(() => {
-    var lastCode = localStorage.getItem("toh_last_code") || ""
-    if(codeInput.current) codeInput.current.value = lastCode
+    setCurrentCode(localStorage.getItem("toh_last_code") || "")
     updateTier()
   }, [codeInput])
 
@@ -21,21 +21,22 @@ function App() {
     if(codeInput.current && currentTier) {
       var newCode = encodeTier(currentTier)
       if(!newCode) return
-      codeInput.current.value = newCode
+      setCurrentCode(newCode)
       localStorage.setItem("toh_last_code", newCode)
     }
   }
 
   function updateTier() {
-    var code = codeInput.current?.value || null
-    localStorage.setItem("toh_last_code", code || "")
+    setCurrentCode(codeInput.current?.value || "")
+    localStorage.setItem("toh_last_code", currentCode)
 
-    if(!code) {
-      setCurrentTier(null)
-      return
+    var tier: tier | null
+    try {
+      tier = decodeTier(currentCode)
+    } catch {
+      tier = null
     }
 
-    var tier = decodeTier(code)
     if(!tier) {
       setCurrentTier(null)
       return
@@ -46,13 +47,13 @@ function App() {
 
   return (
     <>
-      <Header inputRef={codeInput} updateFun={updateTier} />
+      <Header inputRef={codeInput} currentCode={currentCode} updateFun={updateTier} />
 
       <div className='centered-display'>
         {!currentTier ? <BadCode /> : <>
           <EnemiesTable enemies={currentTier.enemies} />
           <ModifiersTable mods={currentTier.mods} changeHandler={generateTier} />
-          <WeaponsTable weapons={currentTier.weapons} />
+          <WeaponsTable weapons={currentTier.weapons} changeHandler={generateTier} />
         </>}
       </div>
     </>
