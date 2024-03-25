@@ -6,16 +6,33 @@ import BadCode from './BadCode';
 import EnemiesTable from './EnemiesTable';
 import ModifiersTable from './ModifiersTable';
 import WeaponsTable from './WeaponsTable';
+import InfoTable from './InfoTable';
 
 function App() {
   const codeInput = useRef<HTMLInputElement>(null)
   const [currentCode, setCurrentCode] = useState("")
   const [currentTier, setCurrentTier] = useState<tier | null>(null);
+  const [backgroundName, setBackgroundName] = useState("None")
 
   useEffect(() => {
     setCurrentCode(localStorage.getItem("toh_last_code") || "")
     updateTier()
   }, [codeInput])
+
+  useEffect(() => {
+    document.body.style.backgroundImage = `url(/bgs/${backgroundName}.png)`
+  }, [backgroundName])
+
+  function createNew() {
+      setCurrentTier({
+        weapons: [],
+        enemies: [],
+        mods: [],
+        map: "Launch",
+        difficulty: 1
+      })
+      setCurrentCode("")
+  }
 
   function generateTier() {
     if(codeInput.current && currentTier) {
@@ -23,6 +40,7 @@ function App() {
       if(!newCode) return
       setCurrentCode(newCode)
       localStorage.setItem("toh_last_code", newCode)
+      setBackgroundName(currentTier.map)
     }
   }
 
@@ -47,10 +65,14 @@ function App() {
 
   return (
     <>
-      <Header inputRef={codeInput} currentCode={currentCode} updateFun={updateTier} />
+      <Header inputRef={codeInput} currentCode={currentCode} updateFun={updateTier} createFun={createNew} />
 
       <div className='centered-display'>
         {!currentTier ? <BadCode /> : <>
+          <span></span>
+          <InfoTable tier={currentTier} changeHandler={generateTier} />
+          <span></span>
+
           <EnemiesTable enemies={currentTier.enemies} changeHandler={generateTier} />
           <ModifiersTable mods={currentTier.mods} changeHandler={generateTier} />
           <WeaponsTable weapons={currentTier.weapons} changeHandler={generateTier} />
