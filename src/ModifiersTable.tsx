@@ -2,14 +2,21 @@ import { modifier } from "./tiers";
 import * as names from "./names"
 import "./CommonTable.css"
 import ImageCard from "./ImageCard";
+import { useState } from "react";
 
 function ModifiersTable(props: {mods: modifier[], changeHandler: VoidFunction}) {
+    const [upperLimit, setUpperLimit] = useState(15)
+
     return <>
         <table>
             <thead>
                 <tr>
-                    <td colSpan={2}>
+                    <td>
                         <h2>Modifiers:</h2>
+                    </td>
+                    <td>
+                        <label>Upper limit: &nbsp;</label>
+                        <input type="number" min={1} max={100} value={upperLimit} onChange={e => setUpperLimit(e.target.valueAsNumber)} />
                     </td>
                 </tr>
             </thead>
@@ -18,7 +25,7 @@ function ModifiersTable(props: {mods: modifier[], changeHandler: VoidFunction}) 
                     <td><ImageCard type="modifier" id={m.name} text={m.name} width={100} height={undefined} /></td>
                     <td>
                         Level: {m.level} <br/>
-                        <input type="range" min={0} max={15} value={m.level} onChange={e => { 
+                        <input type="range" min={0} max={upperLimit} value={m.level} onChange={e => { 
                             m.level = e.target.valueAsNumber
                             props.changeHandler()
                         }} />
