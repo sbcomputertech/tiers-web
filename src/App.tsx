@@ -20,7 +20,7 @@ function App() {
   }, [codeInput])
 
   useEffect(() => {
-    document.body.style.backgroundImage = `url(/bgs/${backgroundName}.png)`
+    document.body.style.backgroundImage = `url(bgs/${backgroundName}.png)`
   }, [backgroundName])
 
   function createNew() {
