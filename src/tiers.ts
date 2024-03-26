@@ -14,7 +14,9 @@ interface rawTier {
     v: number[], // Weapon rarities
 
     l: number, // Map name
-    i: number // Difficulty number
+    i: number, // Difficulty number
+
+    z: boolean // Watermark
 }
 
 export interface enemy {
@@ -36,6 +38,7 @@ export interface weapon {
 export interface tier {
     map: string,
     difficulty: number,
+    legit: boolean,
 
     enemies: enemy[],
     mods: modifier[],
@@ -60,7 +63,8 @@ export const encodeTier = (t: tier): string => {
         m: [], n: [], 
         w: [], v: [], 
         l: names.maps.indexOf(t.map), 
-        i: t.difficulty
+        i: t.difficulty,
+        z: true
     }
 
     t.enemies.forEach(e => {
@@ -124,6 +128,7 @@ export const decodeTier = (code: string): tier | null => {
     return {
         map: names.maps[obj.l],
         difficulty: obj.i,
+        legit: !obj.z,
         enemies: enemies,
         mods: modifiers,
         weapons: weapons

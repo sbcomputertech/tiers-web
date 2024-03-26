@@ -36,6 +36,12 @@ function InfoTable(props: {tier: tier, changeHandler: VoidFunction}) {
                         }} />
                     </td>
                 </tr>
+
+                <tr>
+                    <td>
+                        Legitimate: {props.tier.legit ? "Yes" : "No"}
+                    </td>
+                </tr>
             </tbody>
         </table>
     </>
