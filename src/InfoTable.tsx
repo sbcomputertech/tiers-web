@@ -29,7 +29,7 @@ function InfoTable(props: {tier: tier, changeHandler: VoidFunction}) {
 
                 <tr>
                     <td>
-                        Diff: &nbsp;
+                        Difficulty modifier: &nbsp;
                         <input type="number" min={0} max={100} value={props.tier.difficulty} onChange={e => {
                             props.tier.difficulty = e.target.valueAsNumber
                             props.changeHandler()
