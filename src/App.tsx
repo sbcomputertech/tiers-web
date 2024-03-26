@@ -32,7 +32,8 @@ function App() {
         enemies: [],
         mods: [],
         map: "Launch",
-        difficulty: 1
+        difficulty: 1,
+        legit: false
       })
       setCurrentCode("")
   }
